@@ -6,7 +6,7 @@ variable "bucket_name" {
     type = string
 }
 
-resource "aws_s3_bucket" "static_site_bucket" {
+resource "aws_s3_bucket" "static_site_bucket_teste" {
     bucket = "static-site-${var.bucket_name}"
 
     website {
@@ -20,8 +20,8 @@ resource "aws_s3_bucket" "static_site_bucket" {
     }
 }
 
-resource "aws_s3_bucket_public_access_block" "static_site_bucket" {
-    bucket = aws_s3_bucket.static_site_bucket.id
+resource "aws_s3_bucket_public_access_block" "static_site_bucket_teste" {
+    bucket = aws_s3_bucket.static_site_bucket_teste.id
 
     block_public_acls = false
     block_public_policy = false
@@ -29,20 +29,20 @@ resource "aws_s3_bucket_public_access_block" "static_site_bucket" {
     restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_ownership_controls" "static_site_bucket" {
-    bucket = aws_s3_bucket.static_site_bucket.id
+resource "aws_s3_bucket_ownership_controls" "static_site_bucket_teste" {
+    bucket = aws_s3_bucket.static_site_bucket_teste.id
     rule {
         object_ownership = "BucketOwnerPreferred"
     }
 
 }
 
-resource "aws_s3_bucket_acl" "static_site_bucket" {
+resource "aws_s3_bucket_acl" "static_site_bucket_teste" {
   depends_on = [ 
-    aws_s3_bucket_public_access_block.static_site_bucket,
-    aws_s3_bucket_ownership_controls.static_site_bucket
+    aws_s3_bucket_public_access_block.static_site_bucket_teste,
+    aws_s3_bucket_ownership_controls.static_site_bucket_teste
    ]
 
-   bucket = aws_s3_bucket.static_site_bucket.id
+   bucket = aws_s3_bucket.static_site_bucket_teste.id
    acl = "public-read"
 }
